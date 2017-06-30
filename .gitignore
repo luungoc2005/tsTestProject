@@ -30,3 +30,7 @@ node_modules
 # Typescript
 *.js
 *.js.map
+
+# Input & Output
+input.json
+output.json
