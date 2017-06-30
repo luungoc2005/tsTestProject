@@ -1,5 +1,6 @@
 {
     "compileOnSave": true,
+    "exclude": [],
     "compilerOptions": {
         "watch": true,
         "target": "es5",
@@ -7,6 +8,7 @@
         "types": [
             "node"
         ],
-        "sourceMap": true
+        "sourceMap": true,
+        "outDir": "./"
     }
 }

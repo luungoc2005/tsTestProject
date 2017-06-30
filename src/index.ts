@@ -27,4 +27,6 @@ const pattern: RegExp = /\.cs$/i;
     // results.forEach(item => console.log(item));
 
     fs.writeFileSync('./output.json', JSON.stringify(results, null, 2));
+    
+    console.log('Find output in `output.json`');
 })()
