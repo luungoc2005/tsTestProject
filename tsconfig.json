@@ -1,0 +1,12 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "watch": true,
+        "target": "es5",
+        "module": "commonjs",
+        "types": [
+            "node"
+        ],
+        "sourceMap": true
+    }
+}

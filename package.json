@@ -1,0 +1,21 @@
+{
+  "name": "inspector",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js \"D:\\Private\\Sodexo OMS\\Development\\Sprint-11\\Sprint-11\\HMVN.OMS\\\""
+  },
+  "author": "luungoc2005",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-import": "^2.2.0",
+    "typescript": "^2.4.1"
+  },
+  "dependencies": {
+    "@types/node": "^8.0.6"
+  }
+}
