@@ -5,18 +5,29 @@ import { RootObject, Error, Payload } from './types'
 
 export default function loadData(inputFile: string): string[] {
     try {
-        const content: RootObject = JSON.parse(fs.readFileSync(inputFile));
+        const content: string = fs.readFileSync(inputFile, "utf8");
+
         let retVal: string[] = [];
 
-        if (content.payload) {
-            return content.payload
-                        .map(item => item.endpoints)
+        try {
+            const input: RootObject = JSON.parse(content);
+            if (input.payload) {
+                retVal = input.payload
+                            .map(item => item.endpoints)
+                            .filter(item => item.length)
+                            .reduce((leftArray, rightArray) => leftArray.concat(rightArray))
+                            .map(endpoint => endpoint.toLowerCase())
+            }
+        }
+        catch (parseErr) {
+            if (content.length > 0) {
+                retVal = content.split(/\r\n/g)
                         .filter(item => item.length)
-                        .reduce((leftArray, rightArray) => leftArray.concat(rightArray))
+                        .map(endpoint => endpoint.toLowerCase())
+            }
         }
-        else {
-            return [];
-        }
+
+        return retVal;
     }
     catch (err) {
         return [];
