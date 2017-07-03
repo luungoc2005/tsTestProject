@@ -5,17 +5,22 @@ import loadData from './loader';
 const fs = require('fs');
 
 const pattern: RegExp = /\.cs$/i;
+
+function analyseAll(filePath: string): string[] {
+    return findAll(filePath, pattern)
+                    .map(x => analyseFile(x))
+                    .filter(x => x.length) // filter empty items
+                    .reduce((leftArray, rightArray) => leftArray.concat(rightArray)) // concat all APIs;
+                    .map(endpoint => "/" + endpoint.toLowerCase()); // lowercase all
+}
+
 (function () {
     const mainPath: string = (process.argv.length <= 2) ? "" : 
                                  process.argv[2]
                                 .replace("\"", "")
                                 .replace("'","");
 
-    const findEndpoints: string[] = findAll(mainPath, pattern)
-                    .map(x => analyseFile(x))
-                    .filter(x => x.length) // filter empty items
-                    .reduce((leftArray, rightArray) => leftArray.concat(rightArray)) // concat all APIs;
-                    .map(endpoint => "/" + endpoint.toLowerCase()); // lowercase all
+    const findEndpoints: string[] = analyseAll(mainPath);
 
     const allEndpoints: string[] = loadData('./input.json');
 
