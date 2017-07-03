@@ -9,7 +9,7 @@ const baseAPIRegex: RegExp = /base\(("(?:[^"\\]+|\\.)*")/i;
 
 export default function analyseFile (inputFile: IFileObject): string[] {
     try {
-        const content: string = fs.readFileSync(inputFile.filename, "utf8");
+        const content: string = stripComments(fs.readFileSync(inputFile.filename, "utf8"));
         let retVal: string[] = [];
 
         if (!baseModuleRegex.exec(content)) return retVal;
@@ -68,4 +68,9 @@ function normalizePath(path: string): string {
     return path.split('\\')
             .filter(seg => seg.length > 0)
             .join('/');
+}
+
+const commentsRegex: RegExp = /(\/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+\/)|(\/\/.*)/mg;
+function stripComments(fileContent: string): string {
+    return fileContent.replace(commentsRegex, '');
 }
