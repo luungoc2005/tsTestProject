@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js \"D:\\Private\\Sodexo OMS\\Development\\Sprint-11\\Sprint-11\\HMVN.OMS\\\"",
-    "start:filter": "node filter.js"
+    "start:filter": "node filter.js",
+    "build": "tsc -p"
   },
   "author": "luungoc2005",
   "license": "MIT",
