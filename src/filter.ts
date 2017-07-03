@@ -21,4 +21,6 @@ const excludedPatterns: RegExp[] = [
     });
 
     fs.writeFileSync('./output.json', JSON.stringify(retVal, null, 2));
+    
+    console.log('Find output in `output.json`');
 })();
