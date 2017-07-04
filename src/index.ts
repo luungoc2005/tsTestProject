@@ -11,7 +11,7 @@ const pattern: RegExp = /\.cs$/i;
 function analyseAll(filePath: string): string[] {
     const allFiles: IFileObject[] = findAll(filePath, pattern);
 
-    console.log(`Found ${allFiles.length} files in solution`);
+    console.log(`Found ${allFiles.length} *.cs files in solution`);
 
     return allFiles.map(x => analyseFile(x))
                 .filter(x => x.length) // filter empty items
