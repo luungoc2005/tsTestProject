@@ -2,16 +2,21 @@ import findAll  from './finder';
 import analyseFile from './analyser';
 import loadData from './loader';
 
+import { IFileObject } from './types';
+
 const fs = require('fs');
 
 const pattern: RegExp = /\.cs$/i;
 
 function analyseAll(filePath: string): string[] {
-    return findAll(filePath, pattern)
-                    .map(x => analyseFile(x))
-                    .filter(x => x.length) // filter empty items
-                    .reduce((leftArray, rightArray) => leftArray.concat(rightArray)) // concat all APIs;
-                    .map(endpoint => "/" + endpoint.toLowerCase()); // lowercase all
+    const allFiles: IFileObject[] = findAll(filePath, pattern);
+
+    console.log(`Found ${allFiles.length} files in solution`);
+
+    return allFiles.map(x => analyseFile(x))
+                .filter(x => x.length) // filter empty items
+                .reduce((leftArray, rightArray) => leftArray.concat(rightArray)) // concat all APIs;
+                .map(endpoint => "/" + endpoint.toLowerCase()); // lowercase all
 }
 
 (function () {
