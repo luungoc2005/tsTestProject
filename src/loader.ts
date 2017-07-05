@@ -20,16 +20,34 @@ export default function loadData(inputFile: string): string[] {
             }
         }
         catch (parseErr) {
-            if (content.length > 0) {
-                retVal = content.split(/\r\n/g)
-                        .filter(item => item.length)
-                        .map(endpoint => endpoint.toLowerCase())
-            }
+            return loadLines(content);
         }
 
         return retVal;
     }
     catch (err) {
+        return [];
+    }
+}
+
+
+export function loadFilter() {
+    try {
+        const content: string = fs.readFileSync('./filter.json', "utf8");
+        return loadLines(content);
+    }
+    catch (err) {
+        return [];
+    }
+}
+
+function loadLines(content: string): string[] {
+    if (typeof(content) === 'string' && content.length > 0) {
+        return content.split(/\r\n/g)
+                    .filter(item => item.length)
+                    .map(endpoint => endpoint.toLowerCase());
+    }
+    else {
         return [];
     }
 }
