@@ -43,7 +43,10 @@ function getAllRoutes(content: string) : string[] {
     let apiMatches: string[];
     while ((apiMatches = allAPIRegex.exec(content)) !== null) {
         let routes: string[] = JSON.parse(apiMatches[apiMatches.length - 1]);
-        retVal = retVal.concat(routes);
+
+        if (routes && routes.length > 0) {
+            retVal = retVal.concat([routes[routes.length - 1]]);
+        }
     }
 
     retVal = retVal
